@@ -1,0 +1,38 @@
+name: chem277b
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pandas
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - numpy
+  - jupyterlab
+  - notebook
+  - nbclassic
+  - ipywidgets
+  - jupytext
+  - plotly
+  - bqplot
+  - voila
+  - panel
+  - cmake
+  - ninja
+  - cxx-compiler
+  - ipykernel
+  - nbconvert
+  - jupyterlab_widgets
+  - pip
+  - pip:
+      - torch==2.8.0+cu128
+      - torchvision==0.23.0+cu128
+      - torchaudio==2.8.0+cu128
+      - --extra-index-url https://download.pytorch.org/whl/cu128
+      - pybind11
+      - ipympl
+      - nbcommands
+      - umap-learn
+      - flask
+
