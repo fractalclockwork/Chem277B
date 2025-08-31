@@ -41,10 +41,14 @@ docker run -it --rm \
   -v "$HOME":"$CONTAINER_HOME" \
   -v "$HOME/.ssh":"/root/.ssh" \
   -v "$HOME/.gitconfig":"/root/.gitconfig" \
+  -v /etc/passwd:/etc/passwd:ro \
+  --hostname chem22b_docker\
   --user $USER_ID:$GROUP_ID \
   --env HOME="$CONTAINER_HOME" \
   --workdir "$CONTAINER_WORKSPACE" \
   --entrypoint bash \
   $IMAGE_NAME:$TAG \
   -c "mkdir -p \$HOME/.local/share/jupyter/runtime && exec jupyter lab --ip=0.0.0.0 --port=$PORT --no-browser"
+#  -c "bash" 
+
 

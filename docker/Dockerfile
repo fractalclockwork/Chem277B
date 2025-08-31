@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
     libssl-dev \
+    pandoc \
+    texlive-xetex \
+    texlive-fonts-recommended \
+    texlive-plain-generic \
     libffi-dev && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
@@ -23,8 +27,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get purge -y python3-blinker || true
 
 COPY requirements.txt /tmp/requirements.txt
-#RUN pip install --no-cache-dir -r /tmp/requirements.txt
 RUN pip install --break-system-packages --no-cache-dir -r /tmp/requirements.txt
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.12-dev
+
+# Install JAX with CUDA 12 support
+RUN pip install --upgrade "jax[cuda12]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
 WORKDIR /workspace
 #CMD ["python"]

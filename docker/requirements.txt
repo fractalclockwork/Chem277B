@@ -17,6 +17,7 @@ nbconvert
 jupyterlab_widgets
 ipympl
 nbcommands
+nbconvert
 
 # Visualization
 plotly
