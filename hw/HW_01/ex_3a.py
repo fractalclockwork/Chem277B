@@ -6,7 +6,12 @@ import matplotlib.pyplot as plt
 sym.init_printing(use_latex=True)
 from IPython.display import display, Markdown
 
-# FIXME!!! add docstrings
+############################
+# TODO:
+# - add docstrings
+# - move globals to __init__ defaults
+# - abstract the approximator as a Class
+# - plug in different approximators
 
 ############################
 class Limits:
@@ -18,7 +23,6 @@ class Limits:
 
 ############################
 # Globals
-# FIXME!!! move to __init__ defaults and args as needed
 #our_domain = Limits(0, 4)  # colloquial english (not helpful)
 func_range = Limits(0, 4)    # formal mathematical english
 func_domain = Limits(-1, 15) # formal mathematical english 
@@ -147,12 +151,6 @@ class TaylorNumericPlot:
 
 
 #####################################################
-# Consider a sub-class for our approximation logic as this concept developes.
-# We had an idea about mode and method as an operational seperation.
-# this might not be appearent as a linguistic interpetation of operations.
-# Endomorphism
-# think about this...
-# note to self ;-)
 
 class TaylorTable:
     def __init__(self):
