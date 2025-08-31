@@ -29,18 +29,7 @@ class Palindrome_Checker:
         self.input_len = len(input_str)
         self.registry = KernelRegistry()
 
-    def run_mode(self, mode):
-        """Set mode and return a statement about palindrome status."""
-        self.mode = mode
-        result = self.is_palindrome()
-        return f"Mode '{mode}': {'Palindrome' if result else 'Not a palindrome'}"
-
-    def is_palindrome(self):
-        """Dispatch to the selected palindrome test method."""
-        if self.input_len == 0:
-            return True
-
-        dispatch = {
+        self.dispatch = {
             "loop": self.loop_test,
             "break_loop": self.break_loop_test,
             "pythonic": self.pythonic_test,
@@ -50,15 +39,33 @@ class Palindrome_Checker:
             "recursive": lambda: self.recursive_test(self.input_str),
         }
 
-        if self.mode in self.registry.available():
-            return self.registry.get(self.mode)(self.input_str)
+        # Add our dynamic kernels to dispatch
+        for name in self.registry.available():
+            self.dispatch[name] = lambda name=name: self.registry.get(name)(
+                self.input_str
+            )
 
-        if self.mode in dispatch:
-            return dispatch[self.mode]()
+    def available(self):
+        """Return all supported modes as a list."""
+        return list(self.dispatch.keys())
 
-        raise ValueError(
-            f"Invalid mode: {self.mode}. Available: {self.registry.available() + list(dispatch.keys())}"
-        )
+    def run_mode(self, mode):
+        """Set mode and return a statement about palindrome status."""
+        self.mode = mode
+        result = self.is_palindrome()
+        return f"Mode '{mode}': {'Palindrome' if result else 'Not a palindrome'}"
+
+    def is_palindrome(self):
+        """Dispatch to selected method."""
+        if self.input_len == 0:
+            return True
+
+        try:
+            return self.dispatch[self.mode]()
+        except KeyError:
+            raise ValueError(
+                f"Invalid mode: {self.mode}. Available: {self.available()}"
+            )
 
     def pythonic_test(self) -> bool:
         """Check palindrome using string reversal."""
