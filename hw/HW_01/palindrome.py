@@ -33,6 +33,8 @@ class Palindrome_Checker:
             "loop": self.loop_test,
             "break_loop": self.break_loop_test,
             "pythonic": self.pythonic_test,
+            "pythonic_half": self.pythonic_half_test,
+            "all_half": self.all_half_test,
             "map": self.map_test,
             "memoryview": self.memoryview_test,
             "numpy": self.numpy_test,
@@ -71,6 +73,17 @@ class Palindrome_Checker:
         """Check palindrome using string reversal."""
         return self.input_str == self.input_str[::-1]
 
+    def pythonic_half_test(self) -> bool:
+        """Check palindrome by reversing and comparing half."""
+        s = self.input_str
+        n = len(s)
+        return s[: n // 2] == s[::-1][: n // 2]
+
+    def all_half_test(self) -> bool:
+        """Check palindrome by comparing character pairs from both ends with reduction using all"""
+        s = self.input_str
+        return all(s[i] == s[-i - 1] for i in range(len(s) // 2))
+
     def map_test(self) -> bool:
         """Check palindrome using map and zip for character comparison."""
         half = self.input_len // 2
@@ -98,7 +111,6 @@ class Palindrome_Checker:
         """Check palindrome recursively using index comparison."""
         if right is None:
             right = len(sub_str) - 1
-
         if left >= right:
             return True
         if sub_str[left] != sub_str[right]:
