@@ -47,6 +47,11 @@ Thumbs.db
 *.mov
 *.wmv
 
+# Archive files
+*.zip
+*.tar
+*.tz
+
 # Build files.
 cmake-build-debug
 build
@@ -55,3 +60,7 @@ tmp
 # Python cache
 __pycache__
 .ipynb_checkpoints/
+
+# tOther repos
+UC-Berkeley
+hw/src
