@@ -41,5 +41,17 @@ pybind11
 # Web + utility
 flask
 
+# Bio and Stats
+BioPython
+statsmodels
+fasta
+
+# othe
+pyclustering
+nltk
+multiprocess
+jarvis-tools
+
+
 # Extra index for PyTorch CUDA wheels
 --extra-index-url https://download.pytorch.org/whl/cu128
